@@ -1,13 +1,17 @@
 {% extends 'myapp/base.html' %}
 
 {% block myhdg %}
-    {% if your_name %}
-        <div style="font-size: small; color: aliceblue">Last login: {{ loginInfo }}</div>
-        <div style="color: darkseagreen;  margin-top: 140px">
-         Hello, <a style=" text-decoration: none;" href="{% url 'myapp:my_account' %}">{{ your_name }}</a>
+    {% if user.username %}
+        {# already a registered user #}
+        {% if user.last_name and user.first_name %}
+            Hello {{ user.first_name }} {{ user.last_name }}
+        {% else %} {# for the account which doesn't have the first and lat name #}
+            Hello {{ user.username }}
+        {% endif %}
+        <div>
+            <span> <a href="{% url 'myapp:my_account' %}">My Account</a> </span>
+            <span> <a href="{% url 'myapp:user_logout' %}">Log Out</a> </span>
         </div>
-
-        <div id="logout"><a style=" text-decoration: none;" href="{% url 'myapp:user_logout' %}">logout</a></div>
 
         <br>
 

@@ -19,4 +19,5 @@ urlpatterns = [
     path(r'register/', views.register, name='register'),
     path(r'registerResponse/', views.registerResponse, name='registerResponse'),
 
+    path(r'reset_pwd/', views.reset_pwd, name='reset_pwd'),
 ]

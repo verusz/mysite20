@@ -120,3 +120,12 @@ STATIC_URL = '/static/'
 SESSION_COOKIE_AGE = 3600
 # session expired when close the browser
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# send e-mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # email backend
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP Server
+EMAIL_PORT = 587  # SMTP Server Port
+EMAIL_USE_TLS = True  # TLS
+EMAIL_USE_SSL = False  # SSL
+EMAIL_HOST_USER = 'mysite.django.python@gmail.com'  # email address
+EMAIL_HOST_PASSWORD = 'Django@000'  # email password

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+
+</head>
+<body>
+    <h2>Reset Your Password</h2>
+    <p> Please enter your account's email address, and you will receive the new password.</p>
+    <form action="{% url 'myapp:reset_pwd' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="email_address" placeholder="email address"><br>
+        <input type="submit" name="submit" value="Reset My Password"><br>
+    </form>
+
+{# <a href="{% url 'myapp:send_email' %}">send email</a> #}
+</body>
+</html>

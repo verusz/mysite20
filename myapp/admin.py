@@ -17,6 +17,7 @@ class StudentAdmin(admin.ModelAdmin):
     last_name = models.CharField(max_length=200)
 
     def __str__(self):
+        students = Student.objects
         return "City:{}, first_name: {}, last_name: {}".format(self.city, self.first_name, self.last_name)
 
     def upper_case_name(self):

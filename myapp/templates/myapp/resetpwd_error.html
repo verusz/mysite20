@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password Error</title>
+</head>
+<body>
+    {% if msg %}
+        <p>{{ msg }}</p>
+        <a style="display: block"  href="{% url 'myapp:reset_pwd' %}">Go Back</a>
+        <br>
+{#        <a style="display: block" href="javascript:window.close();">Close it</a>#}
+    {% endif %}
+</body>
+</html>
