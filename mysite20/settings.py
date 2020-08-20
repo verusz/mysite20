@@ -115,6 +115,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # session expired after one hour
 SESSION_COOKIE_AGE = 3600
 # session expired when close the browser
