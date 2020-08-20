@@ -6,22 +6,19 @@ from django.db import models
 from .models import Topic, Course, Student, Order
 
 
+def upper_case_name(student):
+    return ("%s, %s" % (student.first_name, student.last_name)).upper()
+
+
+def city(student):
+    return ("%s" % student.city).upper()
+
+
+upper_case_name.short_description = 'Student Full Name'
+
+
 class StudentAdmin(admin.ModelAdmin):
-    CITY_CHOICES = [
-        ('WS', 'Windsor'),
-        ('CG', 'Calgery'),
-        ('MR', 'Montreal'),
-        ('VC', 'Vancouver')
-    ]
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-
-    def __str__(self):
-        students = Student.objects
-        return "City:{}, first_name: {}, last_name: {}".format(self.city, self.first_name, self.last_name)
-
-    def upper_case_name(self):
-        return self.first_name, self.last_name
+    list_display = (upper_case_name, city)
 
 
 class CourseAdmin(admin.ModelAdmin):
@@ -41,7 +38,6 @@ class CourseAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Topic)
 admin.site.register(Course)
-admin.site.register(Student)
+# admin.site.register(Student)
 admin.site.register(Order)
-# admin.site.register(StudentAdmin)
-
+admin.site.register(Student, StudentAdmin)
