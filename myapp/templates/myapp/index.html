@@ -2,27 +2,43 @@
 
 {% block myhdg %}
     {% if your_name %}
-        Hello <a href="{% url 'myapp:my_account' %}">{{ your_name }}</a> <a href="{% url 'myapp:user_logout' %}">logout</a>
+        <div style="font-size: small; color: aliceblue">Last login: {{ loginInfo }}</div>
+        <div style="color: darkseagreen;  margin-top: 140px">
+         Hello, <a style=" text-decoration: none;" href="{% url 'myapp:my_account' %}">{{ your_name }}</a>
+        </div>
+
+        <div id="logout"><a style=" text-decoration: none;" href="{% url 'myapp:user_logout' %}">logout</a></div>
+
         <br>
-        <h3 style="text-align: center">Last login: {{ loginInfo }}</h3>
+
         {% else %}
-        Welcome visitor <a href="{% url 'myapp:user_login' %}">log in</a>
-         <br>
-        <h3 style="text-align: center">Your last login was one hour ago</h3>
+        <div id="login">
+        <a style=" text-decoration: none;" href="{% url 'myapp:user_login' %}">Login</a> &nbsp;
+        <a style=" text-decoration: none;" href="{% url 'myapp:register' %}">Register</a>
+        </div>
+        <div style="font-size: small; color: aliceblue">Your last login was one hour ago</div>
+        <h1 style="color: aliceblue; font-style: oblique; margin-top: 140px">Welcome visitor </h1> <br>
+
     {% endif %}
+
 {% endblock %}
 
 {% block body_block %}
     {% if top_list %}
-    <h2>List of Topics</h2>
-    <ol>
+        <div style="text-align: center;">
+        <div>
+            <h2 style="color: darkseagreen">List of Topics</h2>
+
         {% for top in top_list %}
             {# use url namespacing to get the url of each topic page #}
-            <a href="{% url 'myapp:detail' top_no=top.id %}">
-                <li>{{ top.name }} </li>
+            <a style=" text-decoration: none; font-size: x-large;" href="{% url 'myapp:detail' top_no=top.id %}">
+                {{ top.name }}<br><br>
             </a>
         {% endfor %}
-    </ol>
+
+        </div>
+        </div>
+
 {% else %}
     <strong>There are no available topics!</strong>
 {% endif %}

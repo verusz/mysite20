@@ -1,10 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+<meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" href="../../static/myapp/freestyle.css"/>
+<title>Register</title>
 </head>
+<style>
+    body{
+        text-align: center;
+        color: white;
+    }
+    input{
+        margin-bottom: 20px;
+        width: 200px;
+        height: 30px;
+        background-color: rgba(0,0,0,0.5);
+        font-size: medium;
+        color: white;
+        border-radius: 20px;
+        border: 2px solid coral;
+    }
+    input:-webkit-autofill{/*填充样式效果取消*/
+	background: none !important;
+	-webkit-text-fill-color: #fff !important;
+	transition: background-color 99999s ease-in-out 0s;
+	-webkit-transition-delay: 99999s;
+}
+    #signin{
+    margin-top: 50px;
+    width: 200px;
+    height: 50px;
+    font-size: large;
+    background-color: coral;
+    color: white;
+    border: 1px solid white;
+    border-radius: 20px
+}
+</style>
 <body>
-$END$
+    <h1 style="margin-top: 100px">Register</h1>
+    <!-- action="/login/" 这里是 提交后访问的路径，因此 要在 urls 添加改路径 -->
+    <!--form action="/myapp/register/" method="post" style="font-size: large; color: skyblue">
+         {% csrf_token %}
+        Username: <br> <input type="text" name="uname" id="uname"><br>
+        Password:<br> <input type="password" name="pwd" id="pwd"><br>
+        City:<br> <input type="text" name="city" id="city"><br>
+        Address:<br> <input type="text" name="addr" id="addr"><br>
+        <input id="signin" type="submit" value="Complete">
+    </form-->
+    <form action="" method="post" novalidate autocomplete="off">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form_obj.username.id_for_label }}">{{ form_obj.username.label }}</label>
+            {{ form_obj.username }} {{ form_obj.username.errors.0 }}
+        </div>
+        <div>
+            <label for="{{ form_obj.pwd.id_for_label }}">{{ form_obj.pwd.label }}</label>
+            {{ form_obj.pwd }} {{ form_obj.pwd.errors.0 }}
+        </div>
+         <div>
+            <label for="{{ form_obj.firstname.id_for_label }}">{{ form_obj.firstname.label }}</label>
+            {{ form_obj.firstname }} {{ form_obj.firstname.errors.0 }}
+        </div>
+         <div>
+            <label for="{{ form_obj.lastname.id_for_label }}">{{ form_obj.lastname.label }}</label>
+            {{ form_obj.lastname }} {{ form_obj.lastname.errors.0 }}
+        </div>
+          <div>
+            <label for="{{ form_obj.city.id_for_label }}">{{ form_obj.city.label }}</label>
+            {{ form_obj.city }} {{ form_obj.city.errors.0 }}
+        </div>
+         <div>
+            <label for="{{ form_obj.addr.id_for_label }}">{{ form_obj.addr.label }}</label>
+            {{ form_obj.addr}} {{ form_obj.addr.errors.0 }}
+        </div>
+        <div>
+            <label for="{{ form_obj.interested_in.id_for_label }}">{{ form_obj.interested_in.label }}</label>
+            {{ form_obj.interested_in}}
+        </div>
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
 </body>
 </html>

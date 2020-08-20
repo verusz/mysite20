@@ -1,59 +1,65 @@
 {% extends 'myapp/base.html' %}
 {% block body_block %}
+    <style>
+        body{
+            text-align: center;
+        }
+        h2{
+            color: white;
+
+        }
+        h3{
+            color: lightskyblue;
+        }
+        form{
+            color: white;
+        }
+    li{
+        list-style-type:none;
+    }
+
+    </style>
     <h2>{{ text }}</h2>
+    {% if stu != "AnonymousUser"  %}
+        <h2>Hello, {{ stu }}</h2>
+
     <h3>List of courses and form</h3>
 
     <form action="/myapp/place_order/" method="post">
         {% csrf_token %}
+          <!--th><label for="id_student" style="color: coral; font-size: large">Student:</label></th>
+        <br>
+         <ul id="id_student" class="radio">
+                    <li><label for="id_student"><input type="radio" name="student" value={{ stu }} class="radio" required
+                                                         id="id_student">
+                        {{ stu }}</label>
+
+                    </li>
+         </ul-->
 
         <tr>
-            <th><label for="id_student_0">Student:</label></th>
+            <th><label for="id_student_0" style="color: coral; font-size: large">Student:</label></th>
             <td>
-                <ul class="errorlist">
-                    <li>Select a valid choice. That choice is not one of the available choices.</li>
-                </ul>
-                <ul id="id_student" class="radio">
-                    <li><label for="id_student_0"><input type="radio" name="student" value="1" class="radio" required
-                                                         id="id_student_0">
-                        ---------</label>
 
-                    </li>
+                <ul id="id_student" class="radio">
+
                     <li><label for="id_student_1"><input type="radio" name="student" value="2" class="radio" required
                                                          id="id_student_1">
-                        Username: john, City:WS, Address: 123 University Avenue</label>
+                      {{ stu }}</label>
 
                     </li>
-                    <li><label for="id_student_2"><input type="radio" name="student" value="3" class="radio" required
-                                                         id="id_student_2">
-                        Username: mary, City:VC, Address: 235 Sunset Avenue</label>
 
-                    </li>
-                    <li><label for="id_student_3"><input type="radio" name="student" value="4" class="radio" required
-                                                         id="id_student_3">
-                        Username: alan, City:CG, Address: 306 Prince Street</label>
-
-                    </li>
-                    <li><label for="id_student_4"><input type="radio" name="student" value="5" class="radio" required
-                                                         id="id_student_4">
-                        Username: josh, City:MR, Address: 442 Sunset Avenue</label>
-
-                    </li>
-                    <li><label for="id_student_5"><input type="radio" name="student" value="6" class="radio" required
-                                                         id="id_student_5">
-                        Username: chris, City:WS, Address: 987 King Street</label>
-
-                    </li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <th><label for="id_course">Course:</label></th>
+            <th><label for="id_course" style="color: coral; font-size: large">Course:</label></th>
             <td>
                 <ul class="errorlist">
                     <li>This field is required.</li>
                 </ul>
                 <select name="course" required id="id_course">
-                    <option value="0" selected>---------</option>
+                    <!--option value="0" selected>---------</option-->
 
                     <option value="1">Topic: Name: IT Certification, Category: IT &amp; Software, Name: CCNA, Price:
                         199.99, For_everyone: False, Description: 1. CCNA IT Certification 199.99 F
@@ -127,7 +133,7 @@
         </tr>
         <br>
         <tr>
-            <th><label for="id_levels">Levels:</label></th>
+            <th><label for="id_levels" style="color: coral; font-size: large">Levels:</label></th>
             <td>
                 <ul class="errorlist">
                     <li>This field is required.</li>
@@ -148,7 +154,7 @@
         </tr>
         <br>
         <tr>
-            <th><label for="id_order_date_month">Order date:</label></th>
+            <th><label for="id_order_date_month" style="color: coral; font-size: large">Order date:</label></th>
             <td>
                 <ul class="errorlist">
                     <li>This field is required.</li>
@@ -218,10 +224,12 @@
                 <input type="hidden" name="initial-order_date" id="initial-id_order_date">
 
             </td>
-        </tr>
-
-        <input type="submit" value="submit">
+        </tr><br><br>
+    <input style="width: 200px; background-color: coral; color: white; border-radius: 20px" type="submit" value="submit">
     </form>
+       {% else %}
+        <h2><a href="{% url 'myapp:user_login' %}">Please Login</a></h2>
+    {% endif %}
 
 
 {% endblock %}

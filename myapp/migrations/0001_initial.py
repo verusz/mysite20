@@ -51,4 +51,11 @@ class Migration(migrations.Migration):
                 ('topic', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='courses', to='myapp.Topic')),
             ],
         ),
+        migrations.CreateModel(
+            name='Register',
+            fields=[
+                ('username', models.CharField(max_length=128)),
+                ('password', models.CharField(max_length=128)),
+            ],
+        ),
     ]

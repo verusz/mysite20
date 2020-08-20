@@ -1,5 +1,17 @@
 {% extends 'myapp/base.html' %}
 {% block body_block %}
+    <style>
+        body{
+            text-align: center;
+            color: white;
+        }
+    h2{
+        color: lightskyblue;
+    }
+    h3{
+        color: coral;
+    }
+    </style>
     <h1>{{ msg }}</h1>
     {% if msg == 'Your course has been ordered successfully.' %}
     <h2>Order details</h2>

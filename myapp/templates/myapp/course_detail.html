@@ -1,5 +1,17 @@
 {% extends 'myapp/base.html' %}
 {% block body_block %}
+    <style>
+        body{
+            text-align: center;
+            color: white;
+        }
+    li{
+        list-style-type:none;
+    }
+    form{
+        margin-top: 50px;
+    }
+    </style>
     <p>{{ course.name }}</p>
     {% if course.for_everyone %}
 
@@ -10,7 +22,7 @@
         {% csrf_token %}
 
         <tr>
-            <th><label for="id_interested_0">Interested:</label></th>
+            <th><label for="id_interested_0" style="font-size: xx-large; color: coral">Interested:</label></th>
             <td>
                 <ul class="errorlist">
                     <li>This field is required.</li>
@@ -29,19 +41,24 @@
                 </ul>
             </td>
         </tr>
+        <br>
         <tr>
-            <th><label for="id_levels">Levels:</label></th>
+            <th><label for="id_levels" style="font-size: xx-large; color: coral">Levels:</label></th>
             <td>
                 <ul class="errorlist">
                     <li>This field is required.</li>
                 </ul>
                 <input type="number" name="levels" required id="id_levels"></td>
         </tr>
+        <br>
+          <br>
         <tr>
-            <th><label for="id_comments">Additional Comments:</label></th>
+            <th><label for="id_comments" style="font-size: xx-large; color: coral">Additional Comments:</label></th>
+            <br>
             <td><textarea name="comments" cols="40" rows="10" id="id_comments">
 </textarea></td>
         </tr>
-        <input type="submit" value="submit">
+        <br><br><br>
+        <input style="width: 200px; background-color: coral; color: white; border-radius: 20px" type="submit" value="submit">
     </form>
 {% endblock %}

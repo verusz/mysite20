@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'myapp/base.html' %}
+
+{% block myhdg %}
+    <style>
+    body{
+        text-align: center;
+        color: white;
+    }
+
+    </style>
+
+
+{% endblock %}
+
+{% block body_block %}
+
+    <h1 style="margin-top: 200px">Registered Successfully !</h1>
+    <div style="margin-top: 100px; font-size: x-large">
+        <a href="{% url 'myapp:index' %}">Go to index page</a><br><br><br>
+        <a href="{% url 'myapp:user_login' %}">Go to Log in</a>
+    </div>
+
+
+{% endblock %}
