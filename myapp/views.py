@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import make_password
 # Create your views here.
 
 # Import necessary classes
 from django.http import HttpResponse, HttpResponseRedirect
 # from pandas.tests.extension import decimal
 from django.urls import reverse
-
+import datetime
 from .forms import *
 from .models import Topic, Course, Student, Order
 from .admin import CourseAdmin
@@ -25,7 +26,8 @@ def home(request):
               "<li> <a href={}> Courses </a></li> " \
               "<li> <a href={}> About </a></li> " \
               "</ul>".format('myapp/', 'myapp/about/')
-    return HttpResponse(content)
+    #return HttpResponse(content)
+    return render(request, 'myapp/home.html')
 
 
 # Create your views here.
@@ -79,11 +81,11 @@ def index(request):
     """
        the index page of myapp
        """
-    # for displaying topics
     top_list = Topic.objects.all().order_by('id')[:10]
     data = {
         'top_list': top_list,
         'your_name': request.user.username,
+        'loginInfo': request.session.get('last_login')
     }
 
     return render(request, 'myapp/index.html', data)
@@ -97,12 +99,15 @@ def courses(request):
 def place_order(request):
     text = "You can place an order here."
     msg = ''
+    stu = request.user
     courlist = Course.objects.all()
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
             order.order_status = 1
+            name = request.user
+            order.student = Student.objects.get(username=name)
             if order.levels <= order.course.stages:
                 stu = order.student
                 course = order.course
@@ -118,25 +123,27 @@ def place_order(request):
                 return render(request, 'myapp/order_response.html', {'msg': msg})
     else:
         form = OrderForm()
-    return render(request, 'myapp/placeorder.html', {'form': form, 'msg': msg, 'courlist': courlist, 'text': text})
+    return render(request, 'myapp/placeorder.html', {'form': form, 'msg': msg, 'courlist': courlist, 'text': text, 'stu': str(stu)})
 
 
 def course_detail(request, cour_id):
     if request.method == 'POST':  # show interests in the current course
         form = InterestForm(request.POST)
-
-        print(form)
         # print(form.interested)
         if form.is_valid():
             course = Course.objects.get(id=cour_id)
-            # course = form.save(commit=False)
-            course.interested += 1
+            #interest = form.save(commit=False)
+            interested = request.POST.get("interested", "")
+            level = request.POST.get("levels", "")
+            comment = request.POST.get("comments", "")
+            if str(interested) == '1':
+                course.interested += 1
             # print(course.id)
             course.save()
             top_list = Topic.objects.all().order_by('id')[:10]
             data = {
                 'top_list': top_list,
-                'your_name': "UWindsor",
+                'your_name': request.user,
             }
             return render(request, 'myapp/index.html', data)
 
@@ -158,6 +165,8 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
+                now_time = datetime.datetime.now().strftime('%F %T')
+                request.session['last_login'] = str(now_time)
                 return HttpResponseRedirect(reverse('myapp:index'))
             else:
                 return HttpResponse('Your account is disabled.')
@@ -169,7 +178,9 @@ def user_login(request):
 
 @login_required
 def user_logout(request):
-    logout(request)
+    # logout(request)
+    # log out the user by deleting request session
+    request.session.flush()
     return HttpResponseRedirect(reverse('myapp:index'))
 
 
@@ -222,3 +233,28 @@ def test_cookie(request):
         return response
     else:   # already has cookies
         return HttpResponse("the cookie name: {}\n, the cookie value: {}".format('cookie_name', cookie_val))
+
+
+def register(request):
+    form_obj = RegisterForm()
+    if request.method == 'POST':
+        form_obj = RegisterForm(request.POST)
+        if form_obj.is_valid():
+            username = request.POST.get("username", "")
+            password = request.POST.get("pwd", "")
+            firstname = request.POST.get("firstname", "")
+            lastname = request.POST.get("lastname", "")
+            city = request.POST.get("city", "")
+            addr = request.POST.get("addr", "")
+            interested_in = request.POST.getlist("interested_in", "")
+            print(interested_in)
+            password = make_password(password)
+            add_register = Student(username=username, password=password, first_name=firstname, last_name=lastname, city=city, address=addr)
+            add_register.save()
+
+            return render(request, "myapp/registerResponse.html")
+    return render(request, "myapp/register.html", {'form_obj': form_obj})
+
+
+def registerResponse(request):
+    return render(request, "myapp/registerResponse.html")

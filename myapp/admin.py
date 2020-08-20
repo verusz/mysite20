@@ -43,3 +43,4 @@ admin.site.register(Course)
 admin.site.register(Student)
 admin.site.register(Order)
 # admin.site.register(StudentAdmin)
+

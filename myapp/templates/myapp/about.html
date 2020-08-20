@@ -1,7 +1,10 @@
 {% extends 'myapp/base.html' %}
-{% block myhdg %}This is about page!{% endblock %}
+{% block myhdg %} <div style="color: white">This is about page!</div>{% endblock %}
 {% block body_block %}
-    <p>{{ text }}</p>
+    <div style="text-align: center">
+     <p style="color: coral">{{ text }}</p>
     <p><a href="/myapp/">Index page (Hardcoded URL) </a></p>
     <p><a href="{% url 'myapp:index' %}">Index page (URL namespacing)</a></p>
+    </div>
+
 {% endblock %}

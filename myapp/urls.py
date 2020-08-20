@@ -4,6 +4,7 @@ from myapp import views
 app_name = 'myapp'
 
 urlpatterns = [
+    path(r'home/', views.home, name='home'),
     path(r'', views.index, name='index'),
     path(r'about/', views.about, name='about'),
     path(r'courses/', views.courses, name='courses'),
@@ -15,4 +16,7 @@ urlpatterns = [
     path(r'logout/', views.user_logout, name='user_logout'),
     path(r'myaccount/', views.myaccount, name='my_account'),
     path(r'test_cookie/', views.test_cookie, name='test_cookie'),
+    path(r'register/', views.register, name='register'),
+    path(r'registerResponse/', views.registerResponse, name='registerResponse'),
+
 ]
