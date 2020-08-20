@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/freestyle.css' %}"/>
     <title>E-Learning WebApp - {% block title %}Welcome!{% endblock %}</title>
 </head>
 <body>
@@ -10,16 +10,19 @@
     <h1>{% block myhdg %}  {% endblock %}</h1>
     {% block body_block %}*** {% endblock %}
 </div>
-<hr/>
-<div>
-    <ul>
+
+<div style="position: fixed; bottom: 10px; width: 100%;"><hr/>
+<div style="text-align: center;">
+    <ul id="baseul">
         <li class="hbar1"><a href="/myapp/about/">Find out about our ELearning site</a></li>
         <li class="hbar1"><a href="{% url 'myapp:index' %}">Click here to
-            return to main page</a><br/></li>
+            return to main page</a></li>
         <li class="hbar1"><a href="/myapp/courses/">Click here to
             go to the courses page</a></li>
-        <li class="hbar1"><a href="/myapp/place_order/">place_order</a></li>
+        <li class="hbar1"><a href="/myapp/place_order/">Place Order</a></li>
     </ul>
 </div>
+</div>
+
 </body>
 </html>

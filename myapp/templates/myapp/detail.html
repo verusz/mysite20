@@ -1,17 +1,20 @@
 {% extends 'myapp/base.html' %}
-{% block myhdg %}Topic detail page{% endblock %}
+{% block myhdg %}<h1 style="color: aliceblue; margin-top: 140px">Topic detail page</h1>{% endblock %}
 {% block body_block %}
 
 {% for top in topic %}
-    <h3> Topic name: </h3>
-        <p> {{ top.name }}
-    <h3> Topic Category: </h3>
-        <p> {{ top.category }}
-{% endfor %}
+    <div style="text-align: center">
+        <h3 style="color: coral;"> Topic name: </h3>
+        <p> {{ top.name }}</p>
+    <h3 style="color: coral;"> Topic Category: </h3>
+        <p> {{ top.category }}</p>
+    </div>
 
-<h3> Courses for current topic: </h3>
-<table border="1">
-    <tr>
+{% endfor %}
+<div style="text-align: center; color: aliceblue">
+<h3 style="color: coral;"> Courses for current topic: </h3>
+<table border="1" align="center">
+    <tr style="color: royalblue;">
         <th>Name</th>
         <th>Price</th>
         <th>For Everyone</th>
@@ -33,6 +36,8 @@
     {% endfor %}
 
 </table>
-<p><a href="{% url 'myapp:index' %}">Index page</a></p>
+<p style="text-align: center; margin-top: 50px"><a href="{% url 'myapp:index' %}">Index page</a></p>
+</div>
+
 
 {% endblock %}

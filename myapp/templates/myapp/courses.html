@@ -1,15 +1,31 @@
 {% extends 'myapp/base.html' %}
 {% block body_block %}
-    <h3>List of available courses</h3>
-    <p>
+    <style>
+        #list{
+
+            text-align: center;
+            height: 410px;
+            width: 800px;
+            overflow: auto;
+            margin: 0 auto;
+            {#margin-top: 80px;#}
+            background-color: rgba(0,0,0,0.4);
+            border-radius:50px;
+        }
+    </style>
+    <h1 style="color: white; text-align: center">List of available courses</h1>
+    <div style="margin-top: 80px">
+        <p id="list">
         {% for course in courlist %}
             {# use url namespacing to get the url of each topic page #}
             <a href="{% url 'myapp:course_detail' cour_id=course.id %}">
 {#            <a href="{% url 'myapp:detail' top_no=top.id %}">#}
                 {{ course.name }}
             </a>
-            <br>
+            <br><br>
         {% endfor %}
     </p>
-    <p><a href="{% url 'myapp:place_order' %}">Place order (URL namespacing)</a></p>
+    </div>
+
+    <p style="text-align: center; margin-top: 50px"><a href="{% url 'myapp:place_order' %}">Place order (URL namespacing)</a></p>
 {% endblock %}

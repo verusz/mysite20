@@ -1,6 +1,12 @@
 {% extends 'myapp/base.html' %}
 
 {% block myhdg %}
+    <style>
+    body{
+        text-align: center;
+        color: white;
+    }
+    </style>
     {% if error %}
         Welcome {{ username }}
         {% else %}
@@ -10,6 +16,7 @@
 {% endblock %}
 
 {% block body_block %}
+    <div style="height: 520px; overflow: auto">
     {% if error %}
         <table border="1">
             <tr>
@@ -47,9 +54,9 @@
         {% else %}
         <p> First Name: {{ first_name }} </p>
         <p> Last Name: {{ last_name }} </p>
-        <p> Ordered Courses: </p>
-        <table border="1">
-            <tr>
+        <p style="color: coral"> Ordered Courses: </p>
+        <table border="1" align="center">
+            <tr style="color: royalblue;">
                 <th>Order Date</th>
                 <th>Name</th>
                 <th>Price</th>
@@ -70,9 +77,9 @@
             </tr>
             {% endfor %}
          </table>
-        <p> Interested Topic: </p>
-        <table border="1">
-            <tr>
+        <p style="color: coral"> Interested Topic: </p>
+        <table border="1" align="center">
+            <tr style="color: royalblue;">
                 <th>Name</th>
                 <th>Category</th>
             </tr>
@@ -84,4 +91,5 @@
             {% endfor %}
          </table>
     {% endif %}
+    </div>
 {% endblock %}
