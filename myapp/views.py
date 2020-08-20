@@ -142,7 +142,7 @@ def course_detail(request, cour_id):
             top_list = Topic.objects.all().order_by('id')[:10]
             data = {
                 'top_list': top_list,
-                'your_name': "UWindsor",
+                'your_name': request.user,
             }
             return render(request, 'myapp/index.html', data)
 
